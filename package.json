@@ -1,0 +1,8 @@
+{
+  "name": "vpt-project-template-demo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/qinfuji/vpt-project-template-demo.git",
+  "author": "qinfuji <7748112@qq.com>",
+  "license": "MIT"
+}
