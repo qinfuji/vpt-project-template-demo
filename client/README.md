@@ -5,6 +5,7 @@
   - ## asset `项目资源目录`
   - ## dialogs `项目对话框目录`
   - ## mocks `接口 mock 目录`
+  - ## layput `布局目录`
   - ## pages `页目录`
     - ### brac `权限管理目录`
       - ### permission 授权管理
