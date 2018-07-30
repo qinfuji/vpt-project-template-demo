@@ -1,5 +1,6 @@
 import * as React from 'react';
+import MyFirstPage from './pages/MyFirstPage';
 
 export function Root(props = {}) {
-  return <div {...props}>测试１</div>;
+  return <MyFirstPage />;
 }

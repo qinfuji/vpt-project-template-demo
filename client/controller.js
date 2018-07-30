@@ -1,4 +1,4 @@
-import { Controller } from '@cerebral/mobx-state-tree';
+import { Controller } from 'cerebral';
 import store from './store';
 
 let Devtools = null;

@@ -6,11 +6,12 @@ import model from './model';
 import { isContributor } from './computed';
 import { isPatron, isLoggedIn, hasLogIn } from './getters';
 import router from './router';
+import { default as myFirstPage } from '../pages/MyFirstPage/module';
 
 export default Module({
   model,
   state: {
-    hasLoadedApp: false,
+    hasLoadedApp: true,
     jwt: null,
     isAuthenticating: true,
     authToken: null,
@@ -39,6 +40,8 @@ export default Module({
     http: HttpProvider(),
   },
   catch: [],
-  modules: {},
+  modules: {
+    myFirstPage,
+  },
   router,
 });

@@ -53,6 +53,13 @@
     esutils "^2.0.2"
     js-tokens "^3.0.0"
 
+"@babel/runtime@7.0.0-beta.51":
+  version "7.0.0-beta.51"
+  resolved "http://registry.npm.taobao.org/@babel/runtime/download/@babel/runtime-7.0.0-beta.51.tgz#48b8ed18307034c6620f643514650ca2ccc0165a"
+  dependencies:
+    core-js "^2.5.7"
+    regenerator-runtime "^0.11.1"
+
 "@babel/template@7.0.0-beta.44":
   version "7.0.0-beta.44"
   resolved "http://registry.npm.taobao.org/@babel/template/download/@babel/template-7.0.0-beta.44.tgz#f8832f4fdcee5d59bf515e595fc5106c529b394f"
@@ -100,6 +107,12 @@
 "@cerebral/mobx-state-tree@^3.2.2":
   version "3.2.2"
   resolved "http://registry.npm.taobao.org/@cerebral/mobx-state-tree/download/@cerebral/mobx-state-tree-3.2.2.tgz#d11e74a5a3e99ae4e29e13d555e3b22221a801dc"
+
+"@cerebral/react@^3.2.2":
+  version "3.2.2"
+  resolved "http://registry.npm.taobao.org/@cerebral/react/download/@cerebral/react-3.2.2.tgz#9fdd5de8c66cc34cf1b1a8103ec1ec9e9c022a13"
+  dependencies:
+    cerebral "^4.2.2"
 
 "@cerebral/router@^3.2.2":
   version "3.2.2"
@@ -1990,7 +2003,7 @@ core-js@^1.0.0:
   version "1.2.7"
   resolved "http://registry.npm.taobao.org/core-js/download/core-js-1.2.7.tgz#652294c14651db28fa93bd2d5ff2983a4f08c636"
 
-core-js@^2.4.0, core-js@^2.5.0:
+core-js@^2.4.0, core-js@^2.5.0, core-js@^2.5.7:
   version "2.5.7"
   resolved "http://registry.npm.taobao.org/core-js/download/core-js-2.5.7.tgz#f972608ff0cead68b841a16a932d0b183791814e"
 
@@ -5693,6 +5706,16 @@ react-hot-loader@^4.3.3:
     react-lifecycles-compat "^3.0.4"
     shallowequal "^1.0.2"
 
+react-icon-base@2.1.0:
+  version "2.1.0"
+  resolved "http://registry.npm.taobao.org/react-icon-base/download/react-icon-base-2.1.0.tgz#a196e33fdf1e7aaa1fda3aefbb68bdad9e82a79d"
+
+react-icons@^2.2.7:
+  version "2.2.7"
+  resolved "http://registry.npm.taobao.org/react-icons/download/react-icons-2.2.7.tgz#d7860826b258557510dac10680abea5ca23cf650"
+  dependencies:
+    react-icon-base "2.1.0"
+
 react-is@^16.3.1:
   version "16.4.1"
   resolved "http://registry.npm.taobao.org/react-is/download/react-is-16.4.1.tgz#d624c4650d2c65dbd52c72622bbf389435d9776e"
@@ -5738,6 +5761,12 @@ react-router@^4.3.1:
     path-to-regexp "^1.7.0"
     prop-types "^15.6.1"
     warning "^4.0.1"
+
+react-spring@^5.4.4:
+  version "5.4.4"
+  resolved "http://registry.npm.taobao.org/react-spring/download/react-spring-5.4.4.tgz#d4f7c9626c9fb83b7e85769538cd80bcc7ba6f61"
+  dependencies:
+    "@babel/runtime" "7.0.0-beta.51"
 
 react@^16.4.1:
   version "16.4.1"
@@ -5880,7 +5909,7 @@ regenerator-runtime@^0.10.5:
   version "0.10.5"
   resolved "http://registry.npm.taobao.org/regenerator-runtime/download/regenerator-runtime-0.10.5.tgz#336c3efc1220adcedda2c9fab67b5a7955a33658"
 
-regenerator-runtime@^0.11.0:
+regenerator-runtime@^0.11.0, regenerator-runtime@^0.11.1:
   version "0.11.1"
   resolved "http://registry.npm.taobao.org/regenerator-runtime/download/regenerator-runtime-0.11.1.tgz#be05ad7f9bf7d22e056f9726cee5017fbf19e2e9"
 

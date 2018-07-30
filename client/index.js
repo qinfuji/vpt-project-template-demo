@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { Container } from '@cerebral/react';
 import { ThemeProvider } from 'styled-components';
-import { Provider } from 'mobx-react';
 import { Router } from 'react-router-dom';
 import { AppContainer } from 'react-hot-loader';
 import registerServiceWorker from './utilities/registerServiceWorker';
@@ -47,13 +47,13 @@ requirePolyfills().then(() => {
   try {
     render(
       <AppContainer>
-        <Provider {...controller.provide()}>
+        <Container controller={controller}>
           <ThemeProvider theme={colors}>
             <Router history={history}>
               <Root />
             </Router>
           </ThemeProvider>
-        </Provider>
+        </Container>
       </AppContainer>,
       root
     );
