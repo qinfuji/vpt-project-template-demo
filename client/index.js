@@ -1,66 +1,71 @@
 import React from 'react';
-import { render } from 'react-dom';
-import { Container } from '@cerebral/react';
-import { ThemeProvider } from 'styled-components';
-import { Router } from 'react-router-dom';
-import { AppContainer } from 'react-hot-loader';
-import registerServiceWorker from './utilities/registerServiceWorker';
-import requirePolyfills from './utilities/load-dynamic-polyfills';
-import colors from './themes/colors';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { BrowserRouter, Route } from 'react-router-dom';
+import * as dvaCore from 'dva-core';
+import 'babel-polyfill';
 
-import history from './utilities/history';
-import controller from './controller';
-import { Root } from './root';
+import Root from './root';
 
-requirePolyfills().then(() => {
-  if (process.env.NODE_ENV === 'development') {
-    window.controller = controller;
-  }
+import './less/metro.less';
+import './less/metro-colors.less';
+import './less/metro-icons.less';
+import './less/schemes/sky-net.less';
+import modules from './modules';
 
-  let root = document.getElementById('react-root');
-  if (!root) {
-    root = document.createElement('div');
-    root.id = 'react-root';
-    document.body.appendChild(root);
-  }
+function overrideCreateElement(replacement, callback) {
+  var originalCreateElement = React.createElement;
+  React.createElement = function(t, p, c) {
+    var args = [].slice.call(arguments);
+    return replacement.apply(null, [originalCreateElement].concat(args));
+  };
+  callback();
+  React.createElement = originalCreateElement;
+}
 
-  const showNotification = (message, type) =>
-    controller.getSignal('notificationAdded')({
-      type,
-      message,
-    });
-
-  window.showNotification = showNotification;
-
-  registerServiceWorker('/service-worker.js', {
-    onUpdated: () => {
-      controller.getSignal('setUpdateStatus')({ status: 'available' });
+function render(Component, props, targetDOMNode, callback) {
+  //var fetchedFragments = reactData;
+  overrideCreateElement(
+    function(originalCreateElement, type, props, children) {
+      var args = [].slice.call(arguments, 1);
+      //console.log('--->type', type);
+      return originalCreateElement.apply(null, args);
     },
-    onInstalled: () => {
-      showNotification(
-        'CodeSandbox has been installed, it now works offline!',
-        'success'
+    function() {
+      Object.assign(props, { createElement: React.createElement });
+      ReactDOM.render(
+        React.createElement(Component, props),
+        targetDOMNode,
+        callback
       );
-    },
-  });
+    }
+  );
+}
 
-  try {
-    render(
-      <AppContainer>
-        <Container controller={controller}>
-          <ThemeProvider theme={colors}>
-            <Router history={history}>
-              <Root />
-            </Router>
-          </ThemeProvider>
-        </Container>
-      </AppContainer>,
-      root
-    );
-  } catch (e) {
-    //console.log(e);
-  }
+let root = document.getElementById('react-root');
+if (!root) {
+  root = document.createElement('div');
+  root.id = 'react-root';
+  document.body.appendChild(root);
+}
+
+const app = dvaCore.create({}, {});
+modules.forEach(module => {
+  app.model(module);
 });
+app.start();
+
+function _Root() {
+  return (
+    <Provider store={app._store}>
+      <BrowserRouter>
+        <Route path="/" component={Root} />
+      </BrowserRouter>
+    </Provider>
+  );
+}
+
+render(_Root, {}, root);
 
 if (module.hot) {
   module.hot.accept();
