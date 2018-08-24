@@ -1,10 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import withEdit from './withEdit';
 
-function Login({ __id }) {
+export default function Login() {
   return (
-    <div className="overlay bg-darkBlue d-flex" id={__id}>
+    <div className="overlay bg-darkBlue d-flex">
       <form className="login-form bg-white p-6 mx-auto  w-25 border bd-default win-shadow flex-self-center">
         <span
           className="mif-vpn-lock mif-4x place-right"
@@ -36,9 +34,3 @@ function Login({ __id }) {
     </div>
   );
 }
-
-Login.propTypes = {
-  __id: PropTypes.string,
-};
-
-export default withEdit()(Login);

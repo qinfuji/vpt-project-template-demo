@@ -4,43 +4,8 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import * as dvaCore from 'dva-core';
 import 'babel-polyfill';
-
-import Root from './root';
-
-import './less/metro.less';
-import './less/metro-colors.less';
-import './less/metro-icons.less';
-import './less/schemes/sky-net.less';
-import modules from './modules';
-
-function overrideCreateElement(replacement, callback) {
-  var originalCreateElement = React.createElement;
-  React.createElement = function(t, p, c) {
-    var args = [].slice.call(arguments);
-    return replacement.apply(null, [originalCreateElement].concat(args));
-  };
-  callback();
-  React.createElement = originalCreateElement;
-}
-
-function render(Component, props, targetDOMNode, callback) {
-  //var fetchedFragments = reactData;
-  overrideCreateElement(
-    function(originalCreateElement, type, props, children) {
-      var args = [].slice.call(arguments, 1);
-      //console.log('--->type', type);
-      return originalCreateElement.apply(null, args);
-    },
-    function() {
-      Object.assign(props, { createElement: React.createElement });
-      ReactDOM.render(
-        React.createElement(Component, props),
-        targetDOMNode,
-        callback
-      );
-    }
-  );
-}
+import App from './pages/App';
+import modules from './store/modules';
 
 let root = document.getElementById('react-root');
 if (!root) {
@@ -59,13 +24,13 @@ function _Root() {
   return (
     <Provider store={app._store}>
       <BrowserRouter>
-        <Route path="/" component={Root} />
+        <Route path="/" component={App} />
       </BrowserRouter>
     </Provider>
   );
 }
 
-render(_Root, {}, root);
+ReactDOM.render(_Root, root);
 
 if (module.hot) {
   module.hot.accept();
