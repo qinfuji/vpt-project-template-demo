@@ -68,6 +68,7 @@
     "react-redux": "^5.0.7",
     "react-redux-loading-bar": "^4.0.5",
     "react-router-dom": "^4.3.1",
+    "react-split-pane": "^0.1.82",
     "react-spring": "^5.4.4",
     "react-tippy": "^1.2.2",
     "redbox-react": "^1.6.0",
@@ -92,6 +93,7 @@
     "babel-preset-env": "^1.7.0",
     "cross-env": "^5.2.0",
     "lodash": "^4.17.10",
-    "memoize-one": "^4.0.0"
+    "memoize-one": "^4.0.0",
+    "minimal.css": "^1.0.1"
   }
 }

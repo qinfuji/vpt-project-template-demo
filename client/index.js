@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Route } from 'react-router-dom';
 import * as dvaCore from 'dva-core';
+import ThemeProvider from './components/ThemeProvider';
+import colors from './common/chemes/colors';
+import 'minimal.css';
 import 'babel-polyfill';
 import App from './pages/App';
-import modules from './store/modules';
 
 let root = document.getElementById('react-root');
 if (!root) {
@@ -15,22 +16,19 @@ if (!root) {
 }
 
 const app = dvaCore.create({}, {});
-modules.forEach(module => {
-  app.model(module);
-});
 app.start();
 
 function _Root() {
   return (
     <Provider store={app._store}>
-      <BrowserRouter>
-        <Route path="/" component={App} />
-      </BrowserRouter>
+      <ThemeProvider theme={colors}>
+        <App />
+      </ThemeProvider>
     </Provider>
   );
 }
 
-ReactDOM.render(_Root, root);
+ReactDOM.render(_Root(), root);
 
 if (module.hot) {
   module.hot.accept();

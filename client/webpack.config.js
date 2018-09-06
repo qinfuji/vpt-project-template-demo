@@ -52,10 +52,6 @@ module.exports = {
     //   }),
     new CopyWebpackPlugin([
       {
-        from: path.join(__dirname, './asset'),
-        to: path.join(__dirname, 'build/asset'),
-      },
-      {
         from: path.join(__dirname, './dll'),
         to: path.join(__dirname, 'build/dll'),
       },
@@ -74,80 +70,13 @@ module.exports = {
   module: {
     rules: [
       {
-        test: [/\.tsx?$/],
-        use: {
-          loader: 'ts-loader',
-          options: {
-            experimentalWatchApi: true,
-            transpileOnly: true,
-          },
-        },
-        exclude: [/node_modules/, /\.scss.ts$/, /\.test.tsx?$/],
-      },
-      {
         test: /\.jsx?$/,
         exclude: /node_modules|build/,
         loader: 'babel-loader?cacheDirectory=true',
       },
       {
-        test: /\.scss$/,
-        enforce: 'pre',
-        exclude: [/node_modules/],
-        use: [
-          {
-            loader: '@microsoft/loader-load-themed-styles', // creates style nodes from JS strings
-          },
-          {
-            loader: 'css-loader', // translates CSS into CommonJS
-            options: {
-              modules: true,
-              importLoaders: 2,
-              localIdentName: '[name]_[local]_[hash:base64:5]',
-              minimize: false,
-            },
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: function() {
-                return [require('autoprefixer')];
-              },
-            },
-          },
-          {
-            loader: 'sass-loader',
-          },
-        ],
-      },
-      {
-        test: /\.less$/,
-        enforce: 'pre',
-        exclude: [/node_modules/],
-        use: [
-          {
-            loader: '@microsoft/loader-load-themed-styles', // creates style nodes from JS strings
-          },
-          {
-            loader: 'css-loader', // translates CSS into CommonJS
-            options: {
-              //modules: true,
-              importLoaders: 2,
-              localIdentName: '[name]_[local]_[hash:base64:5]',
-              minimize: false,
-            },
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: function() {
-                return [require('autoprefixer')];
-              },
-            },
-          },
-          {
-            loader: 'less-loader',
-          },
-        ],
+        test: /\.css$/,
+        loader: 'style-loader!css-loader',
       },
       {
         test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
