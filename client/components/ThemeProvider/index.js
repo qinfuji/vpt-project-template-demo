@@ -1,16 +1,6 @@
-import React, { Component } from 'react';
-import { ThemeProvider as StyledThemeProvider } from 'styled-components';
-//import PropTypes from 'prop-types';
+import React from 'react';
 
-export default class ThemeProvider extends Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return (
-      <StyledThemeProvider {...this.props}>
-        {this.props.children}
-      </StyledThemeProvider>
-    );
-  }
+export default function ThemeProvider(props) {
+  //return <React.Fragment>{props.children}</React.Fragment>;
+  return props.children;
 }

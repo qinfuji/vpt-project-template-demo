@@ -1,10 +1,5 @@
 import React from 'react';
-import Modal from 'react-modal';
 
-class ModalComponent extends React.Component {
-  render() {
-    return <Modal />;
-  }
+export default function Modals(props) {
+  return <React.Fragment>{props.children}</React.Fragment>;
 }
-
-export default ModalComponent;

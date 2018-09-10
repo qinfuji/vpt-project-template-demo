@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import * as dvaCore from 'dva-core';
+import { create as dva } from 'dva-core';
+import { createLogger } from 'redux-logger';
+import StoreProvider from './components/StoreProvider';
 import ThemeProvider from './components/ThemeProvider';
 import colors from './common/chemes/colors';
 import 'minimal.css';
@@ -14,17 +15,17 @@ if (!root) {
   root.id = 'react-root';
   document.body.appendChild(root);
 }
-
-const app = dvaCore.create({}, {});
+const app = dva({}, {});
+app.use({ onAction: createLogger({}) });
 app.start();
 
 function _Root() {
   return (
-    <Provider store={app._store}>
+    <StoreProvider store={app._store}>
       <ThemeProvider theme={colors}>
         <App />
       </ThemeProvider>
-    </Provider>
+    </StoreProvider>
   );
 }
 
