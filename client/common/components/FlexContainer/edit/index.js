@@ -8,11 +8,11 @@ const editable = options => WrapConponent => {
     }
 
     componentDidMount() {
-      console.log('flexContainer editable', this.props.id);
+      console.log('flexContainer editable componentDidMount', this.props.id);
     }
 
     render() {
-      console.log('1111');
+      console.log('flexContainer editable render', this.props.id);
       return <WrapConponent {...this.props} />;
     }
   }

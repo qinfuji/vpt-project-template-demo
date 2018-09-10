@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PrivateRoute from '../../common/components/AuthorizedRoute';
+import RouterSwitch from '../../common/components/RouterSwitch';
 import _FlexContainer from '../../common/components/FlexContainer';
 import SplitPane from '../../common/components/SplitPane';
 
@@ -29,10 +30,10 @@ export default class Index extends Component {
           <SplitPane split="vertical" minSize={50} defaultSize={300}>
             <FlexContainer id={4}>我是左边</FlexContainer>
             <FlexContainer id={5}>
-              <Switch>
-                <Route path="/aaa" component={A} />
+              <RouterSwitch>
+                <PrivateRoute path="/aaa" component={A} />
                 <PrivateRoute path="/bbb" component={B} permission="bbb" />
-              </Switch>
+              </RouterSwitch>
             </FlexContainer>
             <FlexContainer id={6}>我是左1边</FlexContainer>
           </SplitPane>
