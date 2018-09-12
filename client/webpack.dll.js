@@ -19,7 +19,7 @@ module.exports = {
   entry: {
     'dev-vendors': [
       'react-hot-loader',
-      'babel-polyfill',
+      '@babel/polyfill',
       'lodash',
       'react',
       'react-dom',

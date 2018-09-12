@@ -72,7 +72,7 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules|build/,
-        loader: 'babel-loader?cacheDirectory=true',
+        loader: 'babel-loader',
       },
       {
         test: /\.css$/,

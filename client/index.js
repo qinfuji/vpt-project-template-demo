@@ -6,7 +6,7 @@ import StoreProvider from './components/StoreProvider';
 import ThemeProvider from './components/ThemeProvider';
 import colors from './common/chemes/colors';
 import 'minimal.css';
-import 'babel-polyfill';
+import '@babel/polyfill';
 import App from './pages/App';
 
 let root = document.getElementById('react-root');
@@ -29,7 +29,9 @@ function _Root() {
   );
 }
 
-ReactDOM.render(_Root(), root);
+ReactDOM.render(_Root(), root, function() {
+  console.log('finish');
+});
 
 if (module.hot) {
   module.hot.accept();

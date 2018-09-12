@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function FlexContainer(props) {
-  return <div>{props.children}</div>;
+class FlexContainer extends React.Component {
+  render() {
+    console.log('-------1>', this.props);
+    return <div>{this.props.children}</div>;
+  }
 }
 
 FlexContainer.propTypes = {
@@ -10,3 +13,5 @@ FlexContainer.propTypes = {
 };
 
 FlexContainer.defaultProps = {};
+
+export default FlexContainer;

@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import PrivateRoute from '../../common/components/AuthorizedRoute';
 import RouterSwitch from '../../common/components/RouterSwitch';
-import _FlexContainer from '../../common/components/FlexContainer';
+import FlexContainer from '../../common/components/FlexContainer';
 import SplitPane from '../../common/components/SplitPane';
-
-import flexEditable from '../../common/components/FlexContainer/edit/index';
-
-const FlexContainer = flexEditable()(_FlexContainer);
 
 const A = () => (
   <div>
@@ -28,16 +24,24 @@ export default class Index extends Component {
         <FlexContainer id={2}>我是头</FlexContainer>
         <FlexContainer id={3}>
           <SplitPane split="vertical" minSize={50} defaultSize={300}>
-            <FlexContainer id={4}>我是左边</FlexContainer>
+            <FlexContainer id={4}>我是左边21</FlexContainer>
             <FlexContainer id={5}>
-              <RouterSwitch>
-                <PrivateRoute path="/aaa" component={A} />
-                <PrivateRoute path="/bbb" component={B} permission="bbb" />
-              </RouterSwitch>
+              <SplitPane split="horizontal" minSize={50} defaultSize={300}>
+                <FlexContainer id={6}>我是上边1</FlexContainer>
+                <FlexContainer id={7}>
+                  <RouterSwitch>
+                    <PrivateRoute path="/aaa" component={A} />
+                    <PrivateRoute path="/bbb" component={B} />
+                  </RouterSwitch>
+                  <FlexContainer id={8}>我是上边8</FlexContainer>
+                  <FlexContainer id={9}>我是上边91</FlexContainer>
+                  <FlexContainer id={10}>我是上边10</FlexContainer>
+                </FlexContainer>
+              </SplitPane>
             </FlexContainer>
-            <FlexContainer id={6}>我是左1边</FlexContainer>
           </SplitPane>
         </FlexContainer>
+        <FlexContainer id={11}>我是上边11</FlexContainer>
       </FlexContainer>
     );
   }

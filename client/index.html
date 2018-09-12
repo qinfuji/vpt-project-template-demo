@@ -158,7 +158,7 @@
         </div>
     </div>
     <div id="react-root" />
-    <script src="dll/dev-vendors.js"></script>
+    <!--script src="dll/dev-vendors.js"></script-->
     <script>
         (function () {
             var loadingNode = document.getElementById('loading-node');
@@ -183,7 +183,7 @@
                     ON_VPT_LOAD();
                 }, 0);
             }, false);
-            req.open('GET', 'main.js');
+            req.open('GET', 'main.js?aaaa');
             req.send();
         })();
 
