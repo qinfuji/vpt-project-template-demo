@@ -8,7 +8,8 @@
   "scripts": {
     "build:prod": "cross-env NODE_ENV=development webpack --config ./client/webpack.config.js",
     "build:dll": "webpack --config ./client/webpack.dll.js",
-    "start": "cross-env NODE_ENV=development webpack-dev-server --config ./client/webpack.config.js --open --history-api-fallback",
+    "build-js": "cd client &&  babel pages -d dist --extensions .js,.jsx,.ts,.tsx --source-maps inline",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --config ./client/webpack.config.js  --history-api-fallback",
     "build": "npm run build:dll & npm run build:prod"
   },
   "devDependencies": {
@@ -22,6 +23,7 @@
     "@babel/preset-react ": "^7.0.0",
     "@babel/preset-stage-0": "^7.0.0",
     "autoprefixer": "^9.0.0",
+    "babel-eslint": "^9.0.0",
     "babel-loader": "^8.0.2",
     "classnames": "^2.2.6",
     "color": "^3.0.0",
@@ -85,12 +87,12 @@
     "webpack-dev-server": "^3.1.4"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.0.0",
     "axios": "^0.18.0",
     "babel-preset-env": "^1.7.0",
     "cross-env": "^5.2.0",
     "lodash": "^4.17.10",
     "memoize-one": "^4.0.0",
-    "minimal.css": "^1.0.1",
-    "@babel/polyfill": "^7.0.0"
+    "minimal.css": "^1.0.1"
   }
 }

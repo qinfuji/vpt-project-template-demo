@@ -5,7 +5,16 @@ import './split-pane.css';
 export default class SplitPane extends React.Component {
   render() {
     return (
-      <WrapedSplitPane {...this.props}>{this.props.children}</WrapedSplitPane>
+      <div
+        style={{
+          position: 'relative',
+          flexGrow: 1,
+          width: '100%',
+          height: '100%',
+        }}
+      >
+        <WrapedSplitPane {...this.props}>{this.props.children}</WrapedSplitPane>
+      </div>
     );
   }
 }

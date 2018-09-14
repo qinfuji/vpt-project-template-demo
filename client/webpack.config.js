@@ -51,10 +51,10 @@ module.exports = {
     //     manifest: require(path.join(__dirname, './dll/manifest.json')),
     //   }),
     new CopyWebpackPlugin([
-      {
-        from: path.join(__dirname, './dll'),
-        to: path.join(__dirname, 'build/dll'),
-      },
+      // {
+      //   from: path.join(__dirname, './dll'),
+      //   to: path.join(__dirname, 'build/dll'),
+      // },
       {
         from: path.join(__dirname, './icons'),
         to: path.join(__dirname, 'build/icons'),

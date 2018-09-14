@@ -1,59 +1,46 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import _ from 'lodash';
-import { nextId, startPushNode, endPushNode } from '../../../utils/editable';
-import FlexContainer from '../index';
+import FlexContainer from '..';
+import Overlay from './overlay';
+import { regist } from '../../../utils/editable';
 
-const editable = options => WrapConponent => {
-  let nextid = 0;
-  /**
-   * 判断当前组件是否有可编辑节点
-   */
-  function hasEditableChilds(compEle) {
-    let children = compEle.props.children;
-    if (!children || _.isString(children)) {
-      return false;
-    }
-    if (!Array.isArray(children)) {
-      children = [children];
-    }
-    for (let index = 0; index < children.length; index++) {
-      const element = children[index];
-      if (element.type.prototype instanceof EditConnect) {
-        return true;
-      }
-      const hasEditable = hasEditableChilds(element);
-      if (hasEditable) {
-        return hasEditable;
-      }
-    }
-    return false;
-  }
-
+const editable = WrapConponent => {
   class EditConnect extends React.Component {
     constructor(props) {
       super(props);
-      console.log('---------------_>', props.__source);
-      this._root = React.createRef();
-      this.id = nextId();
-      const hasEditableChildren = hasEditableChilds(this);
-      startPushNode({ id: this.id, hasEditableChildren: hasEditableChildren });
+      this._overlay = React.createRef();
+      this._wrap = React.createRef();
+      this.state = {
+        selected: props.editable || false,
+      };
     }
 
     componentWillUnmount() {}
 
     componentDidMount() {
-      const dom = ReactDOM.findDOMNode(this._root.current); //eslint-disable-line
-      console.log('---------------_>1', this.props);
-      endPushNode({ id: this.id, domNode: dom });
+      //console.log(ReactDOM.findDOMNode(this._overlay.current));
+      console.log(ReactDOM.findDOMNode(this._wrap.current)); //eslint-disable-line
     }
 
     render() {
-      console.log(this.props);
-      return <WrapConponent {...this.props} ref={this._root} />;
+      const { selected } = this.state;
+      const {
+        _editInfo: { editId },
+      } = this.props;
+      return React.createElement(
+        WrapConponent,
+        { ...this.props, ref: this._wrap },
+        [
+          this.props.children,
+          selected && (
+            <Overlay key="overlay" editId={editId} ref={this._overlay} />
+          ),
+        ]
+      );
     }
   }
   return EditConnect;
 };
 
-export default editable()(FlexContainer);
+export default editable(FlexContainer);
