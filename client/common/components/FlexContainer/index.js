@@ -5,14 +5,18 @@ class FlexContainer extends React.Component {
   render() {
     return (
       <div
-        style={{
-          display: 'flex',
-          flexDirection: this.props.flexDirection,
-          height: this.props.height,
-          position: 'relative',
-          flexGrow: this.props.width ? '' : 1,
-          width: this.props.width ? this.props.width : '',
-        }}
+        style={Object.assign(
+          {
+            display: 'flex',
+            flexDirection: this.props.flexDirection,
+            height: this.props.height,
+            position: 'relative',
+            flexGrow: this.props.width || this.props.height ? '' : 1,
+            width: this.props.width ? this.props.width : '',
+            backgroundColor: this.props.backgroundColor,
+          },
+          this.props.style
+        )}
       >
         {this.props.children}
       </div>
@@ -25,11 +29,15 @@ FlexContainer.propTypes = {
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   flexDirection: PropTypes.string,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  backgroundColor: PropTypes.string,
+  style: PropTypes.any,
 };
 
 FlexContainer.defaultProps = {
   height: '100%',
   flexDirection: 'column',
+  backgroundColor: 'transparent',
+  style: {},
 };
 
 export default FlexContainer;

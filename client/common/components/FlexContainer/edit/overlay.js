@@ -11,7 +11,7 @@ export default class Overlay extends React.Component {
           border: '1px solid red',
           bottom: 0,
           left: 0,
-          right: 0,
+          width: '20px',
           background: 'rgba(120, 170, 210, 0.7)',
           zIndex: 999,
         }}

@@ -1,4 +1,6 @@
 import React from 'react';
+import HTML5Backend from 'react-dnd-html5-backend';
+import { DragDropContext } from 'react-dnd';
 import Login from './Login';
 import Authentication from '../components/Auth';
 import Index from './Index';
@@ -6,7 +8,7 @@ import Router from '../common/components/Router';
 import PrivateRoute from '../common/components/AuthorizedRoute';
 import Modal from '../components/Modal';
 
-export default function App() {
+function App() {
   return (
     <Authentication login={Login}>
       <Router>
@@ -16,3 +18,5 @@ export default function App() {
     </Authentication>
   );
 }
+
+export default DragDropContext(HTML5Backend)(App);

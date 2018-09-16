@@ -55,6 +55,8 @@
     "prop-types": "^15.5.10",
     "react": "^16.4.1",
     "react-apollo": "^2.1.9",
+    "react-dnd": "^5.0.0",
+    "react-dnd-html5-backend": "^5.0.1",
     "react-dom": "^16.4.1",
     "react-hot-loader": "^4.3.3",
     "react-icons": "^2.2.7",
@@ -94,5 +96,6 @@
     "lodash": "^4.17.10",
     "memoize-one": "^4.0.0",
     "minimal.css": "^1.0.1"
+    
   }
 }

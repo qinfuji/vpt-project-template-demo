@@ -21,21 +21,35 @@ export default class Index extends Component {
     const { match } = this.props;
     return (
       <FlexContainer>
-        <FlexContainer height={40}>我是头</FlexContainer>
-        <FlexContainer editable>
-          <SplitPane split="vertical" minSize={150}>
+        <FlexContainer
+          height={40}
+          flexDirection="row"
+          style={{ backgroundColor: '#3d3d3d' }}
+        >
+          <div>我是Head</div>
+        </FlexContainer>
+        <FlexContainer>
+          <SplitPane split="vertical" minSize={200}>
             <FlexContainer>
-              <FlexContainer height={40}>ss</FlexContainer>
-              <FlexContainer>ss</FlexContainer>
-            </FlexContainer>
-            <SplitPane split="horizontal" minSize={150}>
-              <FlexContainer flexDirection="row">
-                <FlexContainer width={80}>ss</FlexContainer>
-                <FlexContainer editable>111</FlexContainer>
-                <FlexContainer>ss222</FlexContainer>
+              <FlexContainer height={40} style={{ backgroundColor: '#2d2d2d' }}>
+                Title
               </FlexContainer>
-              <FlexContainer>SplitPane left</FlexContainer>
-            </SplitPane>
+              <FlexContainer>我是菜单</FlexContainer>
+            </FlexContainer>
+            <FlexContainer>
+              <FlexContainer>
+                <FlexContainer
+                  height={40}
+                  style={{ backgroundColor: '#2d2d2d' }}
+                >
+                  我是Tab层
+                </FlexContainer>
+                <FlexContainer flexDirection="row">
+                  <FlexContainer>aaa</FlexContainer>
+                  <FlexContainer>bbb</FlexContainer>
+                </FlexContainer>
+              </FlexContainer>
+            </FlexContainer>
           </SplitPane>
         </FlexContainer>
       </FlexContainer>
