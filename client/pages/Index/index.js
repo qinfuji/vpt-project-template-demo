@@ -31,10 +31,10 @@ export default class Index extends Component {
         <FlexContainer>
           <SplitPane split="vertical" minSize={200}>
             <FlexContainer>
+              <FlexContainer>我是菜单</FlexContainer>
               <FlexContainer height={40} style={{ backgroundColor: '#2d2d2d' }}>
                 Title
               </FlexContainer>
-              <FlexContainer>我是菜单</FlexContainer>
             </FlexContainer>
             <FlexContainer>
               <FlexContainer>

@@ -3,14 +3,17 @@ export const entrySource = {
     const {
       _editInfo: { editId },
     } = props;
-    const item = { id: editId };
+    const item = { editId: editId };
     return item;
   },
   canDrag: props => {
     return true;
   },
   isDragging: (props, monitor) => {
-    return monitor.getItem().editId === props.editId;
+    const {
+      _editInfo: { editId },
+    } = props;
+    return monitor.getItem().editId === editId;
   },
   endDrag: (props, monitor, component) => {
     if (!monitor.didDrop()) {
@@ -29,7 +32,7 @@ export const entrySource = {
     const dropResult = monitor.getDropResult();
 
     // This is a good place to call some Flux action
-    console.log(item.id, dropResult.listId);
+    console.log(item.id, dropResult);
   },
 };
 
@@ -40,5 +43,7 @@ export function collectSource(connect, monitor) {
     connectDragSource: connect.dragSource(),
     // You can ask the monitor about the current drag state:
     isDragging: monitor.isDragging(),
+
+    connectDragPreview: connect.dragPreview(),
   };
 }

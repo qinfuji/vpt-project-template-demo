@@ -76,6 +76,7 @@
     "redux-logger": "^3.0.6",
     "redux-mock-store": "^1.5.3",
     "redux-thunk": "^2.3.0",
+    "remeasure": "^3.1.0",
     "reselect": "^3.0.1",
     "sass-loader": "^7.0.3",
     "store": "^2.0.12",
@@ -96,6 +97,5 @@
     "lodash": "^4.17.10",
     "memoize-one": "^4.0.0",
     "minimal.css": "^1.0.1"
-    
   }
 }
