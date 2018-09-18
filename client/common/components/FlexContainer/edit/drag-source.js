@@ -1,9 +1,16 @@
+import ReactDOM from 'react-dom';
+
 export const entrySource = {
   beginDrag: (props, monitor, component) => {
+    const dragDom = ReactDOM.findDOMNode(component); //eslint-disable-line
+    const dragParentDom = dragDom.parentNode;
+
+    console.log(dragDom);
+    console.log(dragParentDom.children);
     const {
       _editInfo: { editId },
     } = props;
-    const item = { editId: editId };
+    const item = { editId: editId, dragDom };
     return item;
   },
   canDrag: props => {
@@ -17,22 +24,11 @@ export const entrySource = {
   },
   endDrag: (props, monitor, component) => {
     if (!monitor.didDrop()) {
-      // You can check whether the drop was successful
-      // or if the drag ended but nobody handled the drop
       return;
     }
-
-    // When dropped on a compatible target, do something.
-    // Read the original dragged item from getItem():
     const item = monitor.getItem();
-
-    // You may also read the drop result from the drop target
-    // that handled the drop, if it returned an object from
-    // its drop() method.
     const dropResult = monitor.getDropResult();
-
-    // This is a good place to call some Flux action
-    console.log(item.id, dropResult);
+    //console.log(item.id, dropResult);
   },
 };
 

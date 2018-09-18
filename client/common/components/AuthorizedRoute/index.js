@@ -7,7 +7,6 @@ export default class PrivateRoute extends React.PureComponent {
     super(props);
   }
   render() {
-    console.log('---->PrivateRoute', this.props);
     return <Route {...this.props} />;
   }
 }

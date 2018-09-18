@@ -7,6 +7,7 @@ class FlexContainer extends React.Component {
       <div
         style={Object.assign(
           {
+            boxSizing: 'border-box',
             display: 'flex',
             flexDirection: this.props.flexDirection,
             height: this.props.height,

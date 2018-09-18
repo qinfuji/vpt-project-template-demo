@@ -26,7 +26,9 @@ export default class Index extends Component {
           flexDirection="row"
           style={{ backgroundColor: '#3d3d3d' }}
         >
-          <div>我是Head</div>
+          <div>
+            <a href="#">我是Head</a>
+          </div>
         </FlexContainer>
         <FlexContainer>
           <SplitPane split="vertical" minSize={200}>
