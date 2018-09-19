@@ -6,6 +6,7 @@ export const entryTarget = {
   },
 
   hover: (props, monitor, component) => {
+    console.log('---->_hover', props, props.__hover, component);
     if (monitor.canDrop()) {
       //console.log('hover props', props, component.props);
       const dropDomElement = ReactDOM.findDOMNode(component); //eslint-disable-line
@@ -21,13 +22,18 @@ export const entryTarget = {
         dropElementRects.top < dragItemInitPosition.y &&
         dropElementRects.bottom > dragItemInitPosition.y
       ) {
+        return;
       }
     }
   },
 
   canDrop: (props, monitor) => {
+    //console.log('canDrop', props);
     const {
       _editInfo: { editId },
+      dragItemDom,
+      dragParentDom,
+      domIndex,
     } = props;
     // console.log('-------------------------');
     // //鼠标相对于浏览器左边的初始偏移

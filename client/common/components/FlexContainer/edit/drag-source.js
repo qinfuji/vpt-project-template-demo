@@ -2,22 +2,20 @@ import ReactDOM from 'react-dom';
 
 export const entrySource = {
   beginDrag: (props, monitor, component) => {
-    const dragDom = ReactDOM.findDOMNode(component); //eslint-disable-line
-    const dragParentDom = dragDom.parentNode;
+    const dragItemDom = ReactDOM.findDOMNode(component); //eslint-disable-line
+    const dragParentDom = dragItemDom.parentNode;
     const childNodes = dragParentDom.childNodes;
     let domIndex = -1;
     for (let i = 0; i < childNodes.length; i++) {
       const item = childNodes[i];
-      if (item === dragDom) {
+      if (item === dragItemDom) {
         domIndex = i;
       }
     }
-    console.log(dragDom);
-    console.log('domIndex', domIndex);
     const {
       _editInfo: { editId },
     } = props;
-    const item = { editId: editId, dragDom, dragParentDom, domIndex };
+    const item = { editId: editId, dragItemDom, dragParentDom, domIndex };
     return item;
   },
   canDrag: props => {

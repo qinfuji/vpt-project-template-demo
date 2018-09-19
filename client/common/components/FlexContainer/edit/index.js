@@ -30,10 +30,15 @@ const editable = WrapConponent => {
 
     collectChildDom = index => element => {
       if (!element) {
+        //当子组件销毁时ref为hull，需要清除引用关系
         delete this._childDomMap[index];
       } else {
         this._childDomMap[index] = ReactDOM.findDOMNode(element); //eslint-disable-line
       }
+    };
+
+    hover = () => {
+      console.log('------------------>hover');
     };
 
     render() {
@@ -83,26 +88,13 @@ const editable = WrapConponent => {
         );
       return React.createElement(
         WrapConponent,
-        { ...this.props, ref: this._wrap, style: style },
+        { ...this.props, ref: this._wrap, style: style, __hover: this.hover },
         _children
-        // [
-        //   this.props.children,
-        //   selected && (
-        //     <Overlay
-        //       key="overlay"
-        //       editId={editId}
-        //       ref={this._overlay}
-        //       zIndex={this._zIndex}
-        //       isDragging={isDragging}
-        //       isOver={isActive}
-        //     />
-        //   ),
-        // ]
       );
     }
   }
-  return DropTarget('FlexContainer', entryTarget, collectTarget)(
-    DragSource('FlexContainer', entrySource, collectSource)(EditConnect)
+  return DropTarget('FlexContainer1', entryTarget, collectTarget)(
+    DragSource('FlexContainer1', entrySource, collectSource)(EditConnect)
   );
 };
 
