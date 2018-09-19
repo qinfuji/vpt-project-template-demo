@@ -52,11 +52,7 @@ const editable = WrapConponent => {
       const dragItem = monitor.getItem();
       const dragItemDomElement = dragItem.dragItemDom;
       const dragDomElementRects = dragItemDomElement.getBoundingClientRect();
-      const dragItemInitPosition = monitor.getInitialSourceClientOffset();
-      const { flexDirection } = this.props;
-      //console.log(dragDomElementRects);
-      //console.log(dropElementRects);
-      //console.log(dragDomElementRects.right >= dropElementRects.right);
+      const { flexDirection = 'column' } = this.props;
       //drap在drag中，不做处理
       if (
         dragDomElementRects.left <= dropElementRects.left &&
@@ -68,42 +64,128 @@ const editable = WrapConponent => {
         return;
       }
       this.setState({ hover: true });
-      const positions = this._childPositions.sort(sortNumber);
-
-      //两类位置，　一个是插入到当前drop , 一个是放置到当前drop的parentNode中
-      const insertParentRects = []; //如果鼠标在这两个区域，则放置在父节点区域
-
-      positions.forEach((position, idx) => {
-        const dom = this._childDomMap[position];
-        const rects = dom.getBoundingClientRect();
-        if (flexDirection == 'row') {
-          //左右
-          insertParentRects({
-            ...rects,
-            right: rects.left + 0.05 * rects.width,
-            position: idx,
-          });
-          insertParentRects({
-            ...rects,
-            left: rects.right - 0.05 * rects.width,
-            position: idx + 1,
-          });
-        } else {
-          //上下
-          insertParentRects({
-            ...rects,
-            bottom: rects.top + 0.05 * rects.heght,
-            position: idx,
-          });
-          insertParentRects({
-            ...rects,
-            top: rects.bottom - 0.05 * rects.heght,
-            position: idx + 1,
-          });
+      const bothSidesRects = [];
+      if (flexDirection == 'row') {
+        //左右
+        bothSidesRects.push({
+          top: dropElementRects.top,
+          bottom: dropElementRects.bottom,
+          left: dropElementRects.left,
+          right: dropElementRects.left + +0.05 * dropElementRects.width,
+        });
+        bothSidesRects.push({
+          top: dropElementRects.top,
+          bottom: dropElementRects.bottom,
+          left: dropElementRects.right - 0.05 * dropElementRects.width,
+          right: dropElementRects.right,
+        });
+      } else {
+        //上下
+        bothSidesRects.push({
+          top: dropElementRects.top,
+          bottom: dropElementRects.top + 0.05 * dropElementRects.height,
+          left: dropElementRects.left,
+          right: dropElementRects.right,
+        });
+        bothSidesRects.push({
+          top: dropElementRects.bottom - 0.05 * dropElementRects.height,
+          bottom: dropElementRects.bottom,
+          left: dropElementRects.left,
+          right: dropElementRects.right,
+        });
+      }
+      //１、判断当前鼠标位置，如果在两端的位置，则插入到当前drop的父节点（不是drop的前就是后）
+      const pointPosition = monitor.getClientOffset(); //鼠标当前位置
+      if (!dropDomElement.parentNode) {
+        //这里直接插入drop,
+        return;
+      }
+      for (let i = 0; i < bothSidesRects.length; i++) {
+        let r = bothSidesRects[i];
+        if (
+          r.left <= pointPosition.x &&
+          r.right >= pointPosition.x &&
+          r.top <= pointPosition.y &&
+          r.bottom >= pointPosition.y
+        ) {
+          if (i == 0) {
+            //console.log('in both side rect before');
+            dropDomElement.parentNode.insertBefore(
+              dragItemDomElement,
+              dropDomElement
+            );
+            return;
+          } else {
+            //console.log('in both side rect after');
+            let nextSibling = dropDomElement.nextSibling;
+            if (!nextSibling) {
+              dropDomElement.parentNode.appendChild(dragItemDomElement);
+              return;
+            } else {
+              dropDomElement.parentNode.insertBefore(
+                dragItemDomElement,
+                nextSibling
+              );
+              return;
+            }
+          }
         }
-      });
+      }
+      //如果是直接插入到drop中，则需要判断，他在子节点中的位置
+      dropDomElement.appendChild(dragItemDomElement);
+      // const positions = this._childPositions.sort(sortNumber);
+      //两类位置，　一个是插入到当前drop , 一个是放置到当前drop的parentNode中
+      // const insertParentRects = []; //如果鼠标在这两个区域，则放置在父节点区域
+      // positions.forEach((position, idx) => {
+      //   const dom = this._childDomMap[position];
+      //   const rects = dom.getBoundingClientRect();
+      //   const p = {
+      //     index: positions.length - 1 == idx ? idx : idx + 1,
+      //     position: positions.length - 1 == idx ? 'append' : 'before',
+      //   };
+      //   if (flexDirection == 'row') {
+      //     const r = {
+      //       top: rects.top,
+      //       bottom: rects.bottom,
+      //     };
+      //     //左右
+      //     insertParentRects.push({
+      //       ...r,
+      //       left: rects.left,
+      //       right: rects.left + 0.05 * rects.width,
+      //       index: idx,
+      //       position: 'before',
+      //     });
+      //     insertParentRects.push({
+      //       ...r,
+      //       left: rects.right - 0.05 * rects.width,
+      //       right: rects.right,
+      //       ...p,
+      //     });
+      //   } else {
+      //     const r = {
+      //       left: rects.left,
+      //       right: rects.right,
+      //     };
+      //     //上下
+      //     insertParentRects.push({
+      //       ...r,
+      //       top: rects.top,
+      //       bottom: rects.top + 0.05 * rects.heght,
+      //       index: idx,
+      //       position: 'before',
+      //     });
+      //     insertParentRects.push({
+      //       ...rects,
+      //       top: rects.bottom - 0.05 * rects.heght,
+      //       bottom: rects.bottom,
+      //       ...p,
+      //     });
+      //   }
+      // });
+      // //１、判断当前鼠标是否在
+      // console.log(insertParentRects);
       //计算drag需要放置的位置
-      console.log('---->hover');
     };
 
     render() {

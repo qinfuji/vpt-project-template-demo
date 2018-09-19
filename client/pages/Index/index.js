@@ -49,6 +49,9 @@ export default class Index extends Component {
                 <FlexContainer flexDirection="row">
                   <FlexContainer>aaa</FlexContainer>
                   <FlexContainer>bbb</FlexContainer>
+                  <FlexContainer>ccc</FlexContainer>
+                  <FlexContainer>ddd</FlexContainer>
+                  <FlexContainer>eee</FlexContainer>
                 </FlexContainer>
               </FlexContainer>
             </FlexContainer>

@@ -7,14 +7,13 @@ export const entryTarget = {
 
   hover: (props, monitor, component) => {
     if (!monitor.canDrop() || !monitor.isOver({ shallow: true })) return;
-
     if (component.hover) {
       component.hover(monitor);
     }
   },
 
   canDrop: (props, monitor) => {
-    console.log('canDrop', props);
+    //console.log('canDrop', props);
     const {
       _editInfo: { editId },
       dragItemDom,
