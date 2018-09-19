@@ -13,9 +13,12 @@ const Container = styled.div`
     props.isDragging ? 'rgba(255, 255, 255, 0.5)' : 'rgba(255, 255, 255, 0)'};
   border: ${props => (props.isOver ? '2px dotted #785' : '')};
   z-index: ${props => props.zIndex};
+  transition-duration: 0.4s;
   &:hover {
     background: rgba(59, 151, 227, 0.1);
-    border: 2px dashed #3b97e3;
+    border: 1px dashed #3b97e3;
+    box-shadow: 0 12px 18px 0 rgba(0, 0, 0, 0.6),
+      0 17px 50px 0 rgba(0, 0, 0, 0.19);
   }
 `;
 const control = styled.div``;

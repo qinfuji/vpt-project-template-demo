@@ -6,35 +6,22 @@ export const entryTarget = {
   },
 
   hover: (props, monitor, component) => {
-    console.log('---->_hover', props, props.__hover, component);
-    if (monitor.canDrop()) {
-      //console.log('hover props', props, component.props);
-      const dropDomElement = ReactDOM.findDOMNode(component); //eslint-disable-line
-      const dropElementRects = dropDomElement.getBoundingClientRect(); //获取当前drop的rect
-      //如果drag的位置在drop的rect中，则不显示
-      const dragItemInitPosition = monitor.getInitialSourceClientOffset();
-      //如果在其中，讲drop分成３分，在前或后的区域则作为放置在当前drap的前或后，作为兄弟节点
-      //如果容器是column这是上中下三部分，如果是row，则是左中右部分
-      //flexContainer有默认大小和展开行为
-      if (
-        dropElementRects.left < dragItemInitPosition.x &&
-        dropElementRects.rigth > dragItemInitPosition.x &&
-        dropElementRects.top < dragItemInitPosition.y &&
-        dropElementRects.bottom > dragItemInitPosition.y
-      ) {
-        return;
-      }
+    if (!monitor.canDrop() || !monitor.isOver({ shallow: true })) return;
+
+    if (component.hover) {
+      component.hover(monitor);
     }
   },
 
   canDrop: (props, monitor) => {
-    //console.log('canDrop', props);
+    console.log('canDrop', props);
     const {
       _editInfo: { editId },
       dragItemDom,
       dragParentDom,
       domIndex,
     } = props;
+    //console.log('canDrop props', props);
     // console.log('-------------------------');
     // //鼠标相对于浏览器左边的初始偏移
     // console.log('getInitialClientOffset', monitor.getInitialClientOffset());
