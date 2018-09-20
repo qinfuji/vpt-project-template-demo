@@ -47,7 +47,7 @@ module.exports = function Plugin(args) {
   }
 
   function isCustomerDir(filepath) {
-    return !/node_modules|common/.test(filepath);
+    return !/node_modules|common|components/.test(filepath);
   }
 
   function hasEditModule(moduleId) {

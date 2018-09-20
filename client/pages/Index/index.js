@@ -3,6 +3,7 @@ import PrivateRoute from '../../common/components/AuthorizedRoute';
 import RouterSwitch from '../../common/components/RouterSwitch';
 import FlexContainer from '../../common/components/FlexContainer';
 import SplitPane from '../../common/components/SplitPane';
+import Header from '../../components/Header';
 
 const A = () => (
   <div>
@@ -21,15 +22,7 @@ export default class Index extends Component {
     const { match } = this.props;
     return (
       <FlexContainer>
-        <FlexContainer
-          height={40}
-          flexDirection="row"
-          style={{ backgroundColor: '#3d3d3d' }}
-        >
-          <div>
-            <a href="#">我是Head</a>
-          </div>
-        </FlexContainer>
+        <Header />
         <FlexContainer>
           <SplitPane split="vertical" minSize={200}>
             <FlexContainer>

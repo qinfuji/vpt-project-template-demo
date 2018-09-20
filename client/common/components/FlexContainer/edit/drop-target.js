@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom';
 
 export const entryTarget = {
   drop: (props, monitor, component) => {
+    console.log('drop');
     return undefined;
   },
 

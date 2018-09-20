@@ -26,7 +26,7 @@ class FlexContainer extends React.Component {
 }
 
 FlexContainer.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   flexDirection: PropTypes.string,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

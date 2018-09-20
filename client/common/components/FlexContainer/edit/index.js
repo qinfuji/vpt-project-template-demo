@@ -199,27 +199,29 @@ const editable = WrapConponent => {
       const { hover } = this.state;
       const children = this.props.children;
       const _children = [];
-      if (_.isString(children)) {
-        _children.push(children);
-      } else {
-        if (!Array.isArray(children)) {
-          const _child = React.cloneElement(children, {
-            ...children.props,
-            _index: 1,
-            key: 1,
-            ref: this.collectChildDom(1),
-          });
-          _children.push(_child);
+      if (children) {
+        if (_.isString(children)) {
+          _children.push(children);
         } else {
-          children.forEach((child, index) => {
-            const _child = React.cloneElement(child, {
-              ...child.props,
-              _index: index,
-              key: index, //eslint-disable-line
-              ref: this.collectChildDom(index),
+          if (!Array.isArray(children)) {
+            const _child = React.cloneElement(children, {
+              ...children.props,
+              _index: 1,
+              key: 1,
+              ref: this.collectChildDom(1),
             });
             _children.push(_child);
-          });
+          } else {
+            children.forEach((child, index) => {
+              const _child = React.cloneElement(child, {
+                ...child.props,
+                _index: index,
+                key: index, //eslint-disable-line
+                ref: this.collectChildDom(index),
+              });
+              _children.push(_child);
+            });
+          }
         }
       }
       selected &&
