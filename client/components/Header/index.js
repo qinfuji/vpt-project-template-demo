@@ -18,10 +18,9 @@ class Header extends React.Component {
 
   render() {
     return (
-      // <AppBar position="relative">
-      //   <Toolbar>{this.props.children}</Toolbar>
-      // </AppBar>
-      <FlexContainer />
+      <AppBar position="relative">
+        <Toolbar>{this.props.children}</Toolbar>
+      </AppBar>
     );
   }
 }

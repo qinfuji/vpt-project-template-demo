@@ -4,7 +4,6 @@
   box-sizing: border-box;
   background: #000;
   opacity: 0.4;
-  z-index: 99999;
   -moz-background-clip: padding;
   -webkit-background-clip: padding;
   background-clip: padding-box;

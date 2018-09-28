@@ -1,8 +1,29 @@
 {
-  "presets": ["@babel/preset-env", "@babel/preset-react"],
-  "plugins": [
-    "@babel/proposal-class-properties",
-    "@babel/proposal-object-rest-spread",
-    "../babel/inject-edit-info-babel.js"
-  ]
+  "env": {
+    "edit": {
+      "presets": ["@babel/preset-env", "@babel/preset-react"],
+      "plugins": [
+        "@babel/proposal-class-properties",
+        "@babel/proposal-object-rest-spread",
+        "../babel/inject-edit-info-babel.js",
+        "@babel/plugin-syntax-dynamic-import"
+      ]
+    },
+    "development": {
+      "presets": ["@babel/preset-env", "@babel/preset-react"],
+      "plugins": [
+        "@babel/proposal-class-properties",
+        "@babel/plugin-syntax-dynamic-import",
+        "@babel/proposal-object-rest-spread"
+      ]
+    },
+    "production": {
+      "presets": ["@babel/preset-env", "@babel/preset-react"],
+      "plugins": [
+        "@babel/proposal-class-properties",
+        "@babel/plugin-syntax-dynamic-import",
+        "@babel/proposal-object-rest-spread"
+      ]
+    }
+  }
 }

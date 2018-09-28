@@ -37,14 +37,14 @@ export default class Index extends Component {
                   height={40}
                   style={{ backgroundColor: '#2d2d2d' }}
                 >
-                  我是Tab层
+                  我是Tab层1
                 </FlexContainer>
                 <FlexContainer flexDirection="row">
                   <FlexContainer>aaa</FlexContainer>
                   <FlexContainer>bbb</FlexContainer>
                   <FlexContainer>ccc</FlexContainer>
                   <FlexContainer>ddd</FlexContainer>
-                  <FlexContainer>eee</FlexContainer>
+                  <FlexContainer>eee1</FlexContainer>
                 </FlexContainer>
               </FlexContainer>
             </FlexContainer>

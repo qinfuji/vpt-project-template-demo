@@ -1,4 +1,0 @@
-/**
- * 生成permission树，为授权使用
- */
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uL2NsaWVudC9zY3JpcHRzL2dlblBlcm1pc3Npb25UcmVlLmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBIiwic291cmNlc0NvbnRlbnQiOlsiLyoqXG4gKiDnlJ/miJBwZXJtaXNzaW9u5qCR77yM5Li65o6I5p2D5L2/55SoXG4gKi9cbiJdfQ==

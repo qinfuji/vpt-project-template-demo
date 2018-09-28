@@ -8,7 +8,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   context: path.resolve(__dirname, './'),
-  entry: { main: ['./index.js'] },
+  entry: {
+    main: [process.env.BABEL_ENV == 'edit' ? './edit/index.js' : './index.js'],
+  },
 
   output: {
     filename: '[name].js',
