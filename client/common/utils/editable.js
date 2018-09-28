@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import { DragSource, DropTarget } from 'react-dnd';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -13,14 +14,27 @@ import Overlay from './overlay';
  * path 文件路径
  * operations 组件提供的操作功能
  * 　　　[{icon:’‘　, label , fn:({openDialog} , position:toobar｜menuContext)=>}]
+ * uis  需要展示的交互界面
+ * [{
+ *    'uiId':
+ * }]
  */
-const editable = ({ path, operations }) => WrapConponent => {
+
+const editable = ({ path, operations, uis }) => WrapConponent => {
+  let context = {
+    codemod(fn) {
+      //修改源文件的方法 , fn返回babel的转换借口
+      //提交到服务端进行修改
+      //fn()
+    },
+    openDialog(Component) {},
+  };
+
   class EditConnect extends React.Component {
     constructor(props) {
       super(props);
       this._overlay = React.createRef();
       this._wrap = React.createRef();
-      //this._zIndex = ++zIndex;
       this._childDomMap = {};
       this._childPositions = [];
       this.state = {
@@ -29,6 +43,9 @@ const editable = ({ path, operations }) => WrapConponent => {
         showMenu: false,
         menuPosition: null,
       };
+      if (props.registerModual) {
+        props.registerModual(uis);
+      }
     }
 
     componentDidMount() {
@@ -193,9 +210,14 @@ const editable = ({ path, operations }) => WrapConponent => {
                   anchorReference="anchorPosition" //使用绝对坐标
                   anchorPosition={menuPosition}
                 >
-                  {operations.map((value, idx) => {
+                  {operations.map(value => {
                     return (
-                      <MenuItem key={value.name} onClick={this.handleClose}>
+                      <MenuItem
+                        key={value.name}
+                        onClick={() => {
+                          value.fn(context);
+                        }}
+                      >
                         {value.label}
                       </MenuItem>
                     );
@@ -238,6 +260,11 @@ const editable = ({ path, operations }) => WrapConponent => {
       );
     }
   }
+
+  EditConnect.propTypes = {
+    registerModual: PropTypes.func, //讲对话框注册到全局上
+    dataTree: PropTypes.any, //组件可以使用的数据
+  };
 
   return DragSource('FlexContainer', entrySource, collectSource)(
     DropTarget('FlexContainer', entryTarget, collectTarget)(EditConnect)

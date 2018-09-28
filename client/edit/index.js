@@ -8,15 +8,17 @@ import { createLogger } from 'redux-logger';
 import _ from 'lodash';
 
 import Authentication from '../components/Auth';
-import Modal from '../components/Modal';
 import StoreProvider from '../components/StoreProvider';
 import ThemeProvider from '../components/ThemeProvider';
 import colors from '../common/chemes/colors';
 import Router from '../common/components/Router';
 //import Toolsbar from './Toolsbar';
 import routers from './routers';
+import Modals from './modals';
+import mode from './module';
 
 const app = dva({}, {});
+app.model(mode);
 app.use({ onAction: createLogger({}) });
 app.start();
 
@@ -32,8 +34,8 @@ function App() {
               })}
             </Switch>
           </Router>
-          <Modal config="" />
         </Authentication>
+        <Modals />
       </ThemeProvider>
     </StoreProvider>
   );
