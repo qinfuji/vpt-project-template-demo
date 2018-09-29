@@ -6,7 +6,7 @@
   "author": "qinfuji <7748112@qq.com>",
   "license": "MIT",
   "scripts": {
-    "build:prod": "cross-env NODE_ENV=development webpack --config ./client/webpack.config.js",
+    "build:edit": "cross-env BABEL_ENV=edit NODE_ENV=development webpack --config ./client/webpack.config.js",
     "build:dll": "webpack --config ./client/webpack.dll.js",
     "build-js": "cd client &&  babel pages -d dist --extensions .js,.jsx,.ts,.tsx --source-maps inline",
     "start:edit": "cross-env NODE_ENV=development  BABEL_ENV=edit webpack-dev-server --config ./client/webpack.config.js  --history-api-fallback",

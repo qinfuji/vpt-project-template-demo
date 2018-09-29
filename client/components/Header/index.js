@@ -1,11 +1,11 @@
 import React from 'react';
-import classNames from 'classnames';
-import PropTypes from 'prop-types';
+//import classNames from 'classnames';
+//import PropTypes from 'prop-types';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import FlexContainer from '../../common/components/FlexContainer';
+//import FlexContainer from '../../common/components/FlexContainer';
 
 export const styles = theme => {
   return {};

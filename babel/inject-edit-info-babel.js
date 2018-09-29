@@ -47,14 +47,7 @@ module.exports = function Plugin(args) {
   }
 
   function isCustomerDir(filepath) {
-    return !/node_modules|common/.test(filepath);
-  }
-
-  function hasEditModule(moduleId) {
-    const modulePath = require.resolve(moduleId);
-    const moduleDir = nodePath.dirname(modulePath);
-    const editDir = nodePath.resolve(moduleDir, 'edit');
-    return fs.existsSync(editDir);
+    return /client\/(pages|modals|components)/.test(filepath);
   }
 
   function pre() {
@@ -68,24 +61,33 @@ module.exports = function Plugin(args) {
 
   const visitor = {
     ImportDeclaration(path, state) {
-      if (!state.filename || !isCustomerDir(state.filename)) {
+      if (!state.filename && !isCustomerDir(state.filename)) {
         return;
       }
+
       const sourceLiteral = path.node.source;
-      let moduleId = sourceLiteral.value;
-      const curFilePath = nodePath.dirname(state.filename);
+      let moduleId = sourceLiteral.value; // 模块id
+      const curFileDir = nodePath.dirname(state.filename);
       if (/^(\.\.?|\/)/.test(moduleId)) {
-        moduleId = nodePath.resolve(curFilePath, moduleId);
+        // 相对路径需要计算出绝对路径
+        moduleId = nodePath.resolve(curFileDir, moduleId);
       }
-      const isexist = hasEditModule(moduleId);
-      if (isexist) {
+      const modulePath = require.resolve(moduleId); // module的绝对路径
+      const moduleDir = nodePath.dirname(modulePath);
+
+      try {
+        const editPath = require.resolve(moduleDir + '/edit');
+        if (editPath === state.filename) {
+          return;
+        }
         sourceLiteral.value += '/edit';
         const defaultImportName = path.node.specifiers[0].local.name;
-        this.editables.push(defaultImportName);
-      }
+        this.editables.push(defaultImportName); // 组件默认的到处变量名
+        this.editPath.push(require.resolve(editPath));
+      } catch (err) {} //eslint-disable-line
     },
     JSXOpeningElement(path, state) {
-      if (!state.filename || !isCustomerDir(state.filename)) {
+      if (!state.filename && !isCustomerDir(state.filename)) {
         // 只有自定义组件才需要修改
         return;
       }
@@ -94,6 +96,7 @@ module.exports = function Plugin(args) {
       const location = path.container.openingElement.loc;
       const tagName = path.node.name.name;
       if (this.editables.indexOf(tagName) < 0) {
+        // 可编辑的组件才需要注入
         return;
       }
       if (!location) {

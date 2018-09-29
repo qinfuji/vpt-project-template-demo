@@ -21,7 +21,7 @@ module.exports = {
   devServer: {
     port: 9000,
     publicPath: '/',
-    contentBase: './build1',
+    contentBase: './build',
     inline: true,
     hot: true,
     before: function(app) {

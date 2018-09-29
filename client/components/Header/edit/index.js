@@ -1,8 +1,8 @@
-import FlexContainer from '..';
-import editable from '../../../../edit/Control/Editable';
+import Header from '..';
+import editable from '../../../edit/Control/Editable';
 
 export default editable({
-  path: 'FlexContainer',
+  path: 'Header',
   dialog: [{}],
   operations: [
     {
@@ -27,4 +27,4 @@ export default editable({
       },
     },
   ],
-})(FlexContainer);
+})(Header);

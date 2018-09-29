@@ -4,11 +4,10 @@ import PropTypes from 'prop-types';
 import { DragSource, DropTarget } from 'react-dnd';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import { withRouter } from 'react-router-dom';
 import _ from 'lodash';
-import { entrySource, collectSource } from './drag-source';
-import { entryTarget, collectTarget } from './drop-target';
-import Overlay from './overlay';
+import { entrySource, collectSource } from './DragSource';
+import { entryTarget, collectTarget } from './DropTarget';
+import Overlay from './Overlay';
 
 /**
  * path 文件路径
@@ -20,7 +19,12 @@ import Overlay from './overlay';
  * }]
  */
 
-const editable = ({ path, operations, uis }) => WrapConponent => {
+const editable = ({
+  path,
+  operations,
+  uis,
+  isContainer = true,
+}) => WrapConponent => {
   let context = {
     codemod(fn) {
       //修改源文件的方法 , fn返回babel的转换借口
@@ -269,6 +273,9 @@ const editable = ({ path, operations, uis }) => WrapConponent => {
   return DragSource('FlexContainer', entrySource, collectSource)(
     DropTarget('FlexContainer', entryTarget, collectTarget)(EditConnect)
   );
+  // } else {
+  //   return DragSource('FlexContainer', entrySource, collectSource)(EditConnect);
+  // }
 };
 
 export default editable;

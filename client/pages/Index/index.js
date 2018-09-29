@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PrivateRoute from '../../common/components/AuthorizedRoute';
 import RouterSwitch from '../../common/components/RouterSwitch';
 import FlexContainer from '../../common/components/FlexContainer';
+import Button from '../../common/components/Button';
 import SplitPane from '../../common/components/SplitPane';
 import Header from '../../components/Header';
 
@@ -22,7 +23,11 @@ export default class Index extends Component {
     const { match } = this.props;
     return (
       <FlexContainer>
-        <Header />
+        <Header>
+          <Button color="primary">Primary</Button>
+          <Button color="secondary">secondary</Button>
+          <Button>Primary</Button>
+        </Header>
         <FlexContainer>
           <SplitPane split="vertical" minSize={200}>
             <FlexContainer>

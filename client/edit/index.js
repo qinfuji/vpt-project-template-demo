@@ -14,8 +14,8 @@ import colors from '../common/chemes/colors';
 import Router from '../common/components/Router';
 //import Toolsbar from './Toolsbar';
 import routers from './routers';
-import Modals from './modals';
-import mode from './module';
+import Modals from './Modals';
+import mode from './Module';
 
 const app = dva({}, {});
 app.model(mode);
